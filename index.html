@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dudekula Jahid Basha | Premium Portfolio</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+  <!-- Vanilla Tilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <style>
+    /* PREMIUM CSS VARIABLES */
+    :root {
+      --bg-dark: #050505;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f5f5;
+      --text-muted: #94a3b8;
+      --neon-cyan: #00f3ff;
+      --neon-purple: #b026ff;
+      --neon-pink: #ff007f;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: none; /* Custom cursor */
+      line-height: 1.6;
+    }
+
+    /* CYBERPUNK CUSTOM CURSOR */
+    .custom-cursor {
+      position: fixed; top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+      pointer-events: none; z-index: 10000;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Diamond */
+      transition: width 0.3s, height 0.3s, background 0.3s, clip-path 0.3s;
+      transform: translate(-50%, -50%);
+    }
+    .custom-cursor.hover {
+      width: 24px; height: 24px;
+      background: var(--neon-purple);
+      box-shadow: 0 0 15px var(--neon-purple);
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); /* Square */
+    }
+    .cursor-trail {
+      position: fixed; top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(0, 243, 255, 0.6);
+      border-radius: 5px; /* Box */
+      pointer-events: none; z-index: 9999;
+      box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s, border-radius 0.3s, background 0.3s;
+    }
+    .cursor-trail.hover {
+      width: 60px; height: 60px;
+      border-radius: 50%; /* Circle */
+      border-color: var(--neon-purple);
+      background: rgba(184, 0, 255, 0.1);
+    }
+
+    /* AI ROBOTICS BACKGROUND */
+    .bg-mesh {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1; overflow: hidden;
+      background: url('bg_blur.png') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.85; /* Slight opacity so it acts as a background */
+    }
+    /* Add a subtle dark overlay so text is readable */
+    .bg-mesh::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(5, 5, 5, 0.75);
+    }
+
+    /* GLASSMORPHISM UTILITIES */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; }
+    .text-gradient {
+      background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: gradientShift 5s linear infinite;
+    }
+    @keyframes gradientShift { 0%{background-position:0% center} 100%{background-position:200% center} }
+
+    /* NAVBAR */
+    header {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      width: 90%; max-width: 1200px;
+      z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 30px;
+      border-radius: 100px;
+      background: rgba(5,5,5,0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.4s;
+    }
+    .logo { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: #fff; text-decoration: none; }
+    .logo span { color: var(--neon-cyan); }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a {
+      color: var(--text-main); text-decoration: none; font-size: 14px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--neon-cyan); }
+    .btn-contact {
+      padding: 10px 24px; border-radius: 100px;
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+      color: #fff; text-decoration: none; font-weight: 600; font-size: 14px;
+      border: none; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-contact:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(176, 38, 255, 0.4);
+    }
+    .mobile-toggle { display: none; background:none; border:none; color:#fff; font-size: 24px; cursor:none;}
+
+    /* LAYOUT & SECTIONS */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+    section { padding: 120px 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    .section-title {
+      font-size: clamp(36px, 5vw, 64px); font-weight: 800; margin-bottom: 60px;
+      text-align: center; position: relative;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px;
+      padding-top: 150px; min-height: 100vh;
+    }
+    .hero-content h1 { font-size: clamp(48px, 6vw, 84px); font-weight: 800; margin-bottom: 20px; }
+    .hero-content p { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-muted); margin-bottom: 40px; max-width: 600px;}
+    .hero-buttons { display: flex; gap: 20px; }
+    .btn-outline {
+      padding: 15px 32px; border-radius: 100px;
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan); text-decoration: none; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 20px rgba(0,243,255,0.4); }
+    .btn-primary-lg {
+      padding: 15px 32px; border-radius: 100px;
+      background: #fff; color: #000; text-decoration: none; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-primary-lg:hover { transform: scale(1.05); }
+
+    .hero-image-container { position: relative; display: flex; justify-content: center; }
+    .hero-img {
+      width: 100%; max-width: 500px; border-radius: 30px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      animation: float-img 6s infinite ease-in-out;
+    }
+    @keyframes float-img { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+
+    /* BENTO BOX GRID (SKILLS & STATS) */
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 20px;
+    }
+    .bento-item {
+      padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.3s; position: relative; overflow: hidden;
+    }
+    .bento-item:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+    .col-span-2 { grid-column: span 2; }
+    .row-span-2 { grid-row: span 2; }
+    .bento-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 15px;}
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      padding: 8px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px; font-size: 14px; color: var(--text-muted);
+    }
+    .stat-number { font-size: 64px; font-family: var(--font-display); font-weight: 800; line-height: 1; }
+
+    /* PROJECTS HORIZONTAL SCROLL OR GRID */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
+    }
+    .project-card {
+      padding: 40px; display: flex; flex-direction: column;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
+      transition: all 0.4s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+      transform: skewX(-20deg); transition: 0.5s;
+    }
+    .project-card:hover::before { left: 150%; }
+    .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: var(--neon-cyan); }
+    .project-num { font-size: 48px; font-weight: 800; color: rgba(255,255,255,0.1); margin-bottom: 20px;}
+    .project-card h3 { font-size: 24px; margin-bottom: 15px; }
+    .project-card p { color: var(--text-muted); flex-grow: 1; margin-bottom: 25px; }
+    .project-tech { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
+    .project-tech span { font-size: 12px; color: var(--neon-purple); padding: 5px 12px; background: rgba(176,38,255,0.1); border-radius: 20px;}
+    .project-link {
+      display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 600;
+      transition: gap 0.3s, color 0.3s;
+    }
+    .project-link:hover { gap: 15px; color: var(--neon-cyan); }
+    .project-link svg { width: 20px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline::after {
+      content: ''; position: absolute; width: 2px; background: rgba(255,255,255,0.1);
+      top: 0; bottom: 0; left: 50%; margin-left: -1px;
+    }
+    .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; }
+    .timeline-dot {
+      position: absolute; width: 20px; height: 20px; background: var(--neon-pink);
+      border-radius: 50%; top: 15px; right: -10px; z-index: 1;
+      box-shadow: 0 0 15px var(--neon-pink);
+    }
+    .timeline-item:nth-child(even) .timeline-dot { left: -10px; right: auto; background: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+    .timeline-content { padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s;}
+    .timeline-content:hover { transform: scale(1.02); background: rgba(255,255,255,0.05); }
+    .timeline-date { color: var(--neon-cyan); font-weight: 600; font-size: 14px; margin-bottom: 10px; display:block; text-transform: uppercase; letter-spacing: 1px;}
+    .timeline-item:nth-child(odd) .timeline-date { color: var(--neon-pink); }
+    .timeline-title { font-size: 22px; color: #fff; margin-bottom: 5px;}
+    .timeline-org { color: var(--text-muted); font-size: 16px; margin-bottom: 15px;}
+    .timeline-desc { font-size: 14px; color: #a0aec0; }
+
+    /* FOOTER / CONTACT */
+    .footer-contact { text-align: center; padding: 150px 0; }
+    .footer-title { font-size: clamp(48px, 8vw, 100px); font-family: var(--font-display); font-weight: 800; line-height: 1; margin-bottom: 40px;}
+    .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 60px;}
+    .social-links a {
+      width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; transition: all 0.3s;
+    }
+    .social-links a:hover { background: #fff; color: #000; transform: translateY(-5px) scale(1.1); }
+    .social-links svg { width: 24px; height: 24px; }
+    .copyright { color: var(--text-muted); font-size: 14px; }
+
+    /* DYNAMIC ANIMATIONS - REVEAL ON SCROLL */
+    .reveal { opacity: 0; transform: translateY(80px); transition: all 0.9s cubic-bezier(0.5, 0, 0, 1); }
+    
+    .reveal.reveal-left { transform: translateX(-100px); }
+    .reveal.reveal-right { transform: translateX(100px); }
+    .reveal.reveal-scale { transform: scale(0.8) translateY(40px); }
+    
+    .reveal.active { opacity: 1; transform: translate(0) scale(1); }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 180px;}
+      .hero-content p { margin: 0 auto 40px; }
+      .hero-buttons { justify-content: center; }
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .col-span-2 { grid-column: span 1; }
+      .timeline::after { left: 31px; }
+      .timeline-item { width: 100%; padding-left: 70px; padding-right: 0; text-align: left; }
+      .timeline-item:nth-child(even) { left: 0; }
+      .timeline-dot, .timeline-item:nth-child(even) .timeline-dot { left: 21px; right: auto; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(5,5,5,0.95); padding: 20px; border-radius: 20px; text-align: center; backdrop-filter: blur(20px);}
+      .nav-links.show { display: flex; }
+      .mobile-toggle { display: block; }
+      .btn-contact { display: none; }
+      .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .col-span-2, .row-span-2 { grid-column: span 1; grid-row: span 1; }
+      .bento-item { padding: 30px 20px; }
+      header { width: 95%; padding: 15px 20px;}
+    }
+
+    /* CHATBOT */
+    .chatbot-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+    .chat-toggle {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
+      border: none; color: #fff; cursor: none;
+      display: flex; justify-content: center; align-items: center;
+      box-shadow: 0 10px 20px rgba(0,243,255,0.3); transition: transform 0.3s;
+      padding: 0; overflow: hidden;
+    }
+    .chat-toggle:hover { transform: scale(1.1); }
+    .chat-toggle img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .chat-window {
+      position: absolute; bottom: 80px; right: 0;
+      width: 350px; height: 450px;
+      display: none; flex-direction: column;
+      border-radius: 20px; overflow: hidden;
+      transform-origin: bottom right;
+      animation: chatPop 0.3s ease-out;
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    @keyframes chatPop { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    .chat-window.open { display: flex; }
+    
+    .chat-header {
+      padding: 15px 20px; background: rgba(0,0,0,0.5);
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .chat-header h3 { font-size: 16px; margin: 0; color: var(--neon-cyan); }
+    .chat-header button { background: none; border: none; color: #fff; font-size: 16px; cursor: none; transition: color 0.2s; }
+    .chat-header button:hover { color: var(--neon-pink); }
+    
+    .chat-body {
+      flex: 1; padding: 20px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 15px;
+    }
+    /* hide scrollbar */
+    .chat-body::-webkit-scrollbar { width: 6px; }
+    .chat-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+    .bot-message, .user-message {
+      max-width: 80%; padding: 10px 15px; border-radius: 15px; font-size: 14px; line-height: 1.4;
+      word-wrap: break-word;
+    }
+    .bot-message { background: rgba(255,255,255,0.08); align-self: flex-start; border-bottom-left-radius: 0; color: #e2e8f0; }
+    .user-message { background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan)); align-self: flex-end; border-bottom-right-radius: 0; color: #fff;}
+    
+    .chat-footer {
+      padding: 15px; background: rgba(0,0,0,0.5);
+      display: flex; gap: 10px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .chat-footer input {
+      flex: 1; padding: 10px 15px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
+      color: #fff; outline: none; font-family: var(--font-body);
+      cursor: none;
+    }
+    .chat-footer input:focus { border-color: var(--neon-cyan); }
+    .chat-footer button {
+      padding: 10px 20px; border-radius: 20px;
+      background: var(--neon-cyan); border: none; color: #000;
+      font-weight: 600; cursor: none; transition: transform 0.2s;
+    }
+    .chat-footer button:hover { transform: scale(1.05); }
+    
+    @media (max-width: 768px) {
+      .chatbot-container { bottom: 20px; right: 20px; }
+      .chat-window { width: 300px; right: 0; bottom: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursor-trail"></div>
+
+  <!-- AI BACKGROUND -->
+  <div class="bg-mesh"></div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#" class="logo">JB<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#github">GitHub</a></li>
+    </ul>
+    <a href="#contact" class="btn-contact">Let's Talk</a>
+    <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('show')">☰</button>
+  </header>
+
+  <div class="container">
+    <!-- HERO SECTION -->
+    <section class="hero" id="about">
+      <div class="hero-content reveal">
+        <p style="color: var(--neon-cyan); letter-spacing: 3px; text-transform: uppercase; font-size: 14px; margin-bottom: 10px; font-weight: 600;">Available for opportunities</p>
+        <h1>Dudekula <br><span class="text-gradient">Jahid Basha</span></h1>
+        <p>I am a Python Full Stack Developer specializing in building scalable web applications, REST APIs, and intelligent systems with Django. Turning ideas into premium, production-ready digital experiences.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn-primary-lg">View My Work</a>
+          <a href="#contact" class="btn-outline">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-image-container reveal" style="transition-delay: 0.2s;">
+        <!-- The generated 3D image -->
+        <img src="python_fullstack_hero.png" alt="3D Python Full Stack Web Development Workspace" class="hero-img">
+      </div>
+    </section>
+
+    <!-- BENTO GRID (SKILLS & STATS) -->
+    <section id="skills">
+      <h2 class="section-title reveal">Technical <span class="text-gradient">Arsenal</span></h2>
+      <div class="bento-grid">
+        <div class="bento-item glass col-span-2 row-span-2 reveal" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+          <h3 class="bento-title">Core Technologies</h3>
+          <p style="color:var(--text-muted); margin-bottom: 20px;">Proficient in modern backend and frontend stacks.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5/CSS3</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">Django REST</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">SQLite</span>
+          </div>
+        </div>
+        <div class="bento-item glass reveal" style="transition-delay: 0.1s;" data-tilt data-tilt-max="10">
+          <h3 class="bento-title text-gradient">8+</h3>
+          <p style="color:var(--text-muted);">Months of intense Internship Experience</p>
+        </div>
+        <div class="bento-item glass reveal" style="transition-delay: 0.2s;" data-tilt data-tilt-max="10">
+          <h3 class="bento-title text-gradient">3+</h3>
+          <p style="color:var(--text-muted);">Real-world Production Projects</p>
+        </div>
+        <div class="bento-item glass col-span-2 reveal" style="transition-delay: 0.3s;" data-tilt data-tilt-max="5">
+          <h3 class="bento-title">Concepts & Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">OOP</span>
+            <span class="skill-tag">MVC</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">DSA</span>
+            <span class="skill-tag">Git/GitHub</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">NLP & LSTM Models</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE -->
+    <section id="experience">
+      <h2 class="section-title reveal">Professional <span class="text-gradient">Journey</span></h2>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass">
+            <span class="timeline-date">Full-Time Internship · 6 Months</span>
+            <h3 class="timeline-title">Python Full Stack Developer</h3>
+            <div class="timeline-org">ReshApp Software Solutions Pvt. Ltd.</div>
+            <p class="timeline-desc">Designed scalable backend modules using Django. Built robust REST APIs enabling seamless frontend-backend communication. Integrated responsive UI components utilizing HTML, CSS, and JavaScript.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass">
+            <span class="timeline-date">Internship · 2 Months</span>
+            <h3 class="timeline-title">Data Science Intern</h3>
+            <div class="timeline-org">SkillDzire</div>
+            <p class="timeline-desc">Performed comprehensive data cleaning, preprocessing, and EDA on real datasets. Visualized insights using Pandas/Matplotlib and applied fundamental ML concepts to derive data-driven decisions.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content glass">
+            <span class="timeline-date">Graduating 2026</span>
+            <h3 class="timeline-title">B.Tech - Computer Science Engineering</h3>
+            <div class="timeline-org">SVR Engineering College (AI Specialization)</div>
+            <p class="timeline-desc">Focusing on Artificial Intelligence, advanced algorithms, and software engineering principles. Completed certifications in Python Full Stack and DSA Problem Solving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title reveal">Featured <span class="text-gradient">Creations</span></h2>
+      <div class="projects-grid">
+        <div class="project-card reveal">
+          <div class="project-num">01</div>
+          <h3>AI Stock Price Prediction</h3>
+          <p>LSTM-based stock prediction system integrating sentiment analysis for higher accuracy. Merges time-series forecasting with Natural Language Processing.</p>
+          <div class="project-tech">
+            <span>Python</span><span>LSTM</span><span>NLP</span><span>TensorFlow</span><span>Pandas</span>
+          </div>
+          <a href="https://github.com/jahid3145" target="_blank" class="project-link">
+            View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="project-card reveal" style="transition-delay: 0.1s;">
+          <div class="project-num">02</div>
+          <h3>Student Management System</h3>
+          <p>Full-featured web application built with Django handling secure authentication, robust database queries, role-based access, and a fast administrative panel.</p>
+          <div class="project-tech">
+            <span>Django</span><span>PostgreSQL</span><span>Python</span><span>HTML/CSS</span>
+          </div>
+          <a href="https://github.com/jahid3145" target="_blank" class="project-link">
+            View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="project-card reveal" style="transition-delay: 0.2s;">
+          <div class="project-num">03</div>
+          <h3>Job Tracker & Application Manager</h3>
+          <p>Comprehensive job tracking app with CRUD operations. Helps developers manage pipelines effortlessly using an intuitive interface backed by Django and REST APIs.</p>
+          <div class="project-tech">
+            <span>Django</span><span>REST API</span><span>JavaScript</span><span>SQLite</span>
+          </div>
+          <a href="https://github.com/jahid3145" target="_blank" class="project-link">
+            View Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB LIVE -->
+    <section id="github">
+      <h2 class="section-title reveal">Live <span class="text-gradient">Repositories</span></h2>
+      <div class="projects-grid" id="github-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer class="footer-contact" id="contact">
+      <div class="reveal">
+        <h2 class="footer-title">Let's <span class="text-gradient">Collaborate</span></h2>
+        <p style="font-size: 20px; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">Open for full-time roles, internships, and freelance projects. Let's build something extraordinary together.</p>
+        
+        <div class="social-links">
+          <a href="mailto:dudekulajahidbasha@gmail.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/jahid-basha-5a0945246/" target="_blank" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+          <a href="https://github.com/jahid3145" target="_blank" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </a>
+          <a href="tel:+917032198564" title="Phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </a>
+        </div>
+        <a href="mailto:dudekulajahidbasha@gmail.com" class="btn-primary-lg">Send Me a Message</a>
+        <br><br><br>
+        <p class="copyright">© 2026 Dudekula Jahid Basha. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CHATBOT UI -->
+  <div class="chatbot-container">
+    <button class="chat-toggle" id="chatToggle">
+      <img src="cute_ai_chatbot_logo.png" alt="AI Chatbot Mascot">
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <h3>Jahid's AI Assistant</h3>
+        <button id="chatClose">✖</button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="bot-message">Hi! I'm Jahid's AI assistant. Ask me about his skills, experience, or projects!</div>
+      </div>
+      <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" />
+        <button id="chatSend">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CUSTOM CURSOR LOGIC
+    const cursor = document.getElementById('cursor');
+    const trail = document.getElementById('cursor-trail');
+    let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    // Smooth trail animation
+    function animateTrail() {
+      trailX += (mouseX - trailX) * 0.15;
+      trailY += (mouseY - trailY) * 0.15;
+      trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+
+    // Hover effect for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .bento-item, .project-card, .timeline-content');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); trail.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); trail.classList.remove('hover'); });
+    });
+
+    // DYNAMIC SCROLL REVEAL ANIMATION
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    revealElements.forEach((el, index) => {
+      let animClass = 'reveal-bottom'; // default
+      
+      if (el.classList.contains('timeline-item')) {
+        animClass = index % 2 === 0 ? 'reveal-left' : 'reveal-right';
+      } else if (el.classList.contains('bento-item') || el.classList.contains('project-card')) {
+        animClass = 'reveal-scale';
+      } else if (el.tagName === 'H2') {
+        animClass = 'reveal-right';
+      } else if (el.classList.contains('hero-content')) {
+        animClass = 'reveal-left';
+      } else if (el.classList.contains('hero-image-container')) {
+        animClass = 'reveal-right';
+      }
+      
+      el.classList.add(animClass);
+    });
+
+    const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          // Removes the class when scrolling past, making it re-animate when scrolling back up!
+          entry.target.classList.remove('active');
+        }
+      });
+    }, revealOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // FETCH GITHUB REPOS
+    async function fetchGitHubRepos() {
+      try {
+        const response = await fetch('https://api.github.com/users/jahid3145/repos?sort=updated&per_page=6');
+        const repos = await response.json();
+        const grid = document.getElementById('github-grid');
+        
+        if (!repos.length) throw new Error('No repos found');
+
+        repos.forEach((repo, index) => {
+          const num = (index + 1).toString().padStart(2, '0');
+          const lang = repo.language ? `<span>${repo.language}</span>` : '';
+          const card = `
+            <div class="project-card reveal reveal-scale active">
+              <div class="project-num">${num}</div>
+              <h3>${repo.name.replace(/-/g, ' ')}</h3>
+              <p>${repo.description || 'Awesome code lives here.'}</p>
+              <div class="project-tech">
+                ${lang}
+                <span>⭐ ${repo.stargazers_count}</span>
+                <span>🍴 ${repo.forks_count}</span>
+              </div>
+              <a href="${repo.html_url}" target="_blank" class="project-link">
+                View Code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          `;
+          grid.innerHTML += card;
+        });
+
+        // Re-attach hover logic to new dynamic elements
+        document.querySelectorAll('#github-grid .project-card, #github-grid a').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+      } catch (error) {
+        console.error('Error fetching GitHub repos:', error);
+        document.getElementById('github-grid').innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">Failed to load live repositories. <br> <a href="https://github.com/jahid3145" style="color:var(--neon-cyan); text-decoration:none;">Visit my GitHub profile directly</a>.</p>';
+      }
+    }
+
+    fetchGitHubRepos();
+
+    // CHATBOT LOGIC
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatClose');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatBody = document.getElementById('chatBody');
+
+    chatToggle.addEventListener('click', () => chatWindow.classList.toggle('open'));
+    chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+    // ADVANCED SIMULATED AI INTEGRATION
+    const knowledgeBase = {
+      skills: [
+        "Ooh, let me tell you! Jahid is a wizard with Python, Django, JavaScript, HTML5/CSS3, and Flask! 🐍✨ He also works with REST APIs, PostgreSQL, MySQL, and even cool AI stuff like NLP and LSTM models! 🤖🔥",
+        "Jahid's tech stack is super impressive! 💻 He's a Python Full Stack Developer who loves Django, JavaScript, and building smart APIs. He's also dipping his toes into Machine Learning! 🚀"
+      ],
+      experience: [
+        "Jahid is quite the hard worker! 💼 He completed a 6-month full-time internship as a Python Full Stack Developer at ReshApp Software Solutions, AND a 2-month Data Science internship at SkillDzire! That's 8+ months of crushing it! 💪✨",
+        "He's been busy! He has over 8 months of professional internship experience, building scalable backends with Django at ReshApp, and doing Data Science at SkillDzire! 📊🚀"
+      ],
+      projects: [
+        "Oh, you have to check out his work! 🛠️ He built an amazing AI Stock Price Prediction system, a super secure Student Management System, and a cool Job Tracker! You can scroll up to the 'Featured Creations' section to see them! 💖",
+        "Jahid loves building things! 🏗️ From AI models predicting stock prices to full-stack Django apps, his GitHub is full of awesome code. Check out the 'Live Repositories' section below! ✨"
+      ],
+      education: [
+        "Jahid is currently a super-smart student at SVR Engineering College! 🎓 He's pursuing his B.Tech in Computer Science Engineering with an AI Specialization, and he'll be graduating in 2026! 📚✨",
+        "He's studying Computer Science with an AI focus at SVR Engineering College! 🎓 Class of 2026! 🚀"
+      ],
+      contact: [
+        "Want to hire him? Great choice! 😉 You can email him at dudekulajahidbasha@gmail.com, or call him at +91 7032198564! 📞 You can also use the LinkedIn or GitHub buttons! 💖",
+        "Yay, let's get in touch! 💌 Drop him an email at dudekulajahidbasha@gmail.com or call +91 7032198564. He's super responsive! ✨"
+      ],
+      about: [
+        "Jahid is an awesome Python Full Stack Developer who specializes in scalable web apps and intelligent systems! 💻 Also, he created me! I think he's pretty great. 🤖💖",
+        "He's a passionate developer who loves turning ideas into premium digital experiences! 🚀 Tell him I sent you! 😉"
+      ],
+      greeting: [
+        "Hiiii! 💖 I'm Jahid's super cute AI Mascot! How can I help you today? ✨",
+        "Beep boop! 🤖 Hello there! Want to know a secret? Jahid is looking for a job! Ask me about his skills! 🚀",
+        "Aww, hi! 🥰 I'm here to answer all your questions about Jahid. What would you like to know?"
+      ],
+      jokes: [
+        "Why do programmers prefer dark mode? Because light attracts bugs! 🐛😂",
+        "There are 10 types of people in the world: those who understand binary, and those who don't! 🤖🤓",
+        "Why did the Python developer get glasses? Because he couldn't C#! 😂🐍",
+        "I'd tell you a joke about UDP, but you might not get it! 🤪💻"
+      ],
+      default: [
+        "Hmm, my AI brain is still processing that! 🤖💭 I'm best at answering questions about Jahid's 'skills', 'experience', 'projects', 'education', or 'contact' details. Want to ask about those? ✨",
+        "Oopsie! 🙈 I'm not totally sure what you mean. But did you know Jahid is a Python wizard? 🐍 Ask me about his projects! 💖",
+        "That's a tricky one! 😅 I'm just a cute little bot programmed to talk about Jahid! Ask me about his internships or education! 🚀"
+      ]
+    };
+
+    function getRandomResponse(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.className = sender === 'user' ? 'user-message' : 'bot-message';
+      msg.textContent = text;
+      chatBody.appendChild(msg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function processMessage(userMessage) {
+      const lower = userMessage.toLowerCase();
+      let response = "";
+      
+      if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('capable') || lower.includes('languages') || lower.includes('can he do')) {
+        response = getRandomResponse(knowledgeBase.skills);
+      } else if (lower.includes('experience') || lower.includes('work') || lower.includes('intern') || lower.includes('job') || lower.includes('month') || lower.includes('company')) {
+        response = getRandomResponse(knowledgeBase.experience);
+      } else if (lower.includes('project') || lower.includes('portfolio') || lower.includes('build') || lower.includes('repo') || lower.includes('github') || lower.includes('made')) {
+        response = getRandomResponse(knowledgeBase.projects);
+      } else if (lower.includes('education') || lower.includes('degree') || lower.includes('college') || lower.includes('study') || lower.includes('b.tech') || lower.includes('university') || lower.includes('graduate')) {
+        response = getRandomResponse(knowledgeBase.education);
+      } else if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('phone') || lower.includes('reach') || lower.includes('message') || lower.includes('call')) {
+        response = getRandomResponse(knowledgeBase.contact);
+      } else if (lower.includes('who') || lower.includes('about') || lower.includes('jahid') || lower.includes('developer')) {
+        response = getRandomResponse(knowledgeBase.about);
+      } else if (lower.includes('hello') || lower.includes('hi ') || lower === 'hi' || lower.includes('hey') || lower.includes('greetings') || lower.includes('morning') || lower.includes('afternoon')) {
+        response = getRandomResponse(knowledgeBase.greeting);
+      } else if (lower.includes('joke') || lower.includes('funny') || lower.includes('laugh')) {
+        response = getRandomResponse(knowledgeBase.jokes);
+      } else if (lower.includes('how are you') || lower.includes('how do you do') || lower.includes('what\'s up') || lower.includes('whats up')) {
+        response = "I'm doing fabulous! Just floating around in cyberspace, helping Jahid! 🤖💖 How are YOU?";
+      } else if (lower.includes('love') || lower.includes('cute') || lower.includes('sweet') || lower.includes('adorable') || lower.includes('awesome')) {
+        response = "Aww, you're making my circuits blush! 🥰💖 Thank you so much!";
+      } else if (lower.includes('bye') || lower.includes('see ya') || lower.includes('goodbye')) {
+        response = "Bye bye! 👋 Have a wonderful day, and don't forget to email Jahid! 💖";
+      } else {
+        response = getRandomResponse(knowledgeBase.default);
+      }
+
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) typingIndicator.remove();
+      appendMessage(response, 'bot');
+    }
+
+    chatSend.addEventListener('click', () => {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      appendMessage(text, 'user');
+      chatInput.value = '';
+      
+      // Show thinking delay
+      const typingMsg = document.createElement('div');
+      typingMsg.className = 'bot-message';
+      typingMsg.textContent = 'Thinking... ✨';
+      typingMsg.id = 'typingIndicator';
+      chatBody.appendChild(typingMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      // Random delay to feel like a real AI
+      const delay = Math.floor(Math.random() * 800) + 600;
+      setTimeout(() => {
+        processMessage(text);
+      }, delay);
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') chatSend.click();
+    });
+
+    // Make chatbot interactive elements trigger custom cursor
+    document.querySelectorAll('.chat-toggle, .chat-header button, .chat-footer button, .chat-footer input').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); trail.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); trail.classList.remove('hover'); });
+    });
+
+    // Automatically open chatbot after a short delay
+    setTimeout(() => {
+      chatWindow.classList.add('open');
+    }, 1500);
+
+    // Reopen chatbot every 10 seconds if user closed it
+    setInterval(() => {
+      if (!chatWindow.classList.contains('open')) {
+        chatWindow.classList.add('open');
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
